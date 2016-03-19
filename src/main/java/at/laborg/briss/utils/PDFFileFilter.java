@@ -24,9 +24,9 @@ import javax.swing.filechooser.FileFilter;
 public class PDFFileFilter extends FileFilter {
 	@Override
 	public boolean accept(File pathname) {
-                // sometimes we get null-ed file
-                if (pathname == null)
-                        return false;
+		// sometimes we get null-ed file
+		if (pathname == null)
+			return false;
 
 		if (pathname.isDirectory())
 			return true;
@@ -35,6 +35,6 @@ public class PDFFileFilter extends FileFilter {
 
 	@Override
 	public final String getDescription() {
-		return null;
+		return "PDF (*.pdf)";
 	}
 }
