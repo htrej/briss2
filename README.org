@@ -25,7 +25,7 @@
 
 Download with =git=; there is no installation script.
 
-=git clone git://github.com/danmbox/briss2.git=
+=git clone git://github.com/htrej/briss2.git=
 
 Build with:
 
