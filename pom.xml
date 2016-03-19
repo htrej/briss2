@@ -18,6 +18,17 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
+<repositories>
+      <repository>
+        <id>clojars.org</id>
+        <url>http://clojars.org/repo</url>
+      </repository>
+      <repository>
+       <id>geotoolkit</id>
+       <url>http://maven.geotoolkit.org/</url>
+      </repository>
+</repositories>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -33,6 +44,35 @@
 					</archive>
 				</configuration>
 			</plugin>
+            <plugin>
+                <groupId>org.dstovall</groupId>
+                <artifactId>onejar-maven-plugin</artifactId>
+                <version>1.4.4</version>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <!-- Optional 
+                            <onejarVersion>0.97</onejarVersion>-->
+                            <!-- Optional, use only if you need to include native libraries (dll's) 
+                            <binlibs>
+                                <fileSet>
+                                    <directory>${project.build.directory}/dllextract</directory>
+                                    <includes>
+                                        <include>test.dll</include>
+                                    </includes>
+                                </fileSet>
+                            </binlibs> -->
+                            <!-- Optional, default is false -->
+                            <attachToBuild>true</attachToBuild>
+                            <!-- Optional, default is "onejar" -->
+                            <classifier>onejar</classifier>
+                        </configuration>
+                        <goals>
+                            <goal>one-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.5.1</version>
@@ -41,9 +81,6 @@
 					<target>1.5</target>
 				</configuration>
 			</plugin>
-
-
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -56,19 +93,7 @@
 			</plugin>
 		</plugins>
 	</build>
-
-<repositories>
-      <repository>
-        <id>clojars.org</id>
-        <url>http://clojars.org/repo</url>
-      </repository>
-      <repository>
-       <id>geotoolkit</id>
-       <url>http://maven.geotoolkit.org/</url>
-      </repository>
-</repositories>
-
-
+    
 	<dependencies>
 <!-- <dependency> -->
 <!-- 	<groupId>bouncycastle</groupId> -->
@@ -127,58 +152,3 @@
 	</modules>
 </project>
 
-<project>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.mycompany.mypackage.MyMainClass</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.dstovall</groupId>
-                <artifactId>onejar-maven-plugin</artifactId>
-                <version>1.4.4</version>
-                <executions>
-                    <execution>
-                        <configuration>
-                            <!-- Optional -->
-                            <onejarVersion>0.97</onejarVersion>
-                            <!-- Optional, use only if you need to include native libraries (dll's) -->
-                            <binlibs>
-                                <fileSet>
-                                    <directory>${project.build.directory}/dllextract</directory>
-                                    <includes>
-                                        <include>test.dll</include>
-                                    </includes>
-                                </fileSet>
-                            </binlibs>
-                            <!-- Optional, default is false -->
-                            <attachToBuild>true</attachToBuild>
-                            <!-- Optional, default is "onejar" -->
-                            <classifier>onejar</classifier>
-                        </configuration>
-                        <goals>
-                            <goal>one-jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>onejar-maven-plugin.googlecode.com</id>
-            <url>http://onejar-maven-plugin.googlecode.com/svn/mavenrepo</url>
-        </pluginRepository>
-    </pluginRepositories>
-
-</project>
